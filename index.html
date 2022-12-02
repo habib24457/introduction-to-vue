@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Vue</title>
+
+    <style>
+        .box-container{
+            display: flex;
+        }
+        .box{
+            background-color: brown;
+            height: 200px;
+            width: 150px;
+            padding: 5px;
+        }
+        .box.two{
+            background-color: rgb(42, 85, 165);
+        }
+        .box.three{
+            background-color: rgb(42, 165, 106);
+
+        }
+        .box.four{
+            background-color: rgb(194, 50, 117);
+
+        }
+        .box.five{
+            background-color: rgb(207, 29, 44);
+
+        }
+        .button-design{
+            padding-left: 10px;
+        }
+        /* v-cloak will remove the extra rendering */
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        {{greeting}}
+        <input v-model="greeting"/>
+        <hr/>
+        <div class="box-container">
+            <div v-if="isVisible" class="box">Using V-if Directive which is similar to If statement in JS</div>
+            <div v-show="isVisible" class="box two">v-show is also a view directive which works similar to v-if</div>
+        </div>
+        <hr/>
+        <h3>This section is showing the output using v-if, v-else-if,v-else</h3>
+        <hr/>
+        <div class="box-container">
+            <div v-show="isVisible2" class="box three">v-if="isVisible" where isVisible=true</div>
+            <div v-show="isVisible2" class="box four">v-else-if="isVisible"</div>
+            <div v-show="isVisible2" class="box five">v-else="isVisible"</div>
+            <button v-on:click="isVisible2=false" class="button-design">
+                <span>Hide Boxes</span>
+            </button>
+            <button  @click="isVisible2=true" class="button-design">
+                <span>Show Boxes </span>
+            </button>
+
+            <button @click="toggleBoxes" class="button-design">
+                <span>Toggle Boxes </span>
+            </button>
+        </div>
+        <div>
+            <h2>Click Events in vue</h2>
+            <ul>
+                <li>v-on:"variableName"</li>
+                <li>@click:"functionName"</li>
+                <li>Keyboard event, @keyup:"functionName"</li>
+
+            </ul>
+        </div>
+        <hr/>
+        <h2>Functions and 'this' keyword</h2>
+        <hr/>
+        <div class="box-container">
+            <button @click="showText(propText+'Hello Demo Prop Text')"> Click to pass a text to console</button>
+        </div>
+
+    </div>
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+       let app = Vue.createApp({
+        data:function(){
+            return{
+                greeting:'Hello From vue!!',
+                isVisible:true,
+                isVisible2:true
+            }
+        },
+        methods:{
+            toggleBoxes(){
+               this.isVisible2 = !this.isVisible2 
+            }
+        }
+       })
+       app.mount('#app')
+    </script>
+</body>
+</html>
